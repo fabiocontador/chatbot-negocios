@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Viabilidade</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f9;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        .pergunta {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            background-color: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+        label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        input[type="radio"] {
+            margin-right: 8px;
+        }
+        .opcoes {
+            margin-top: 10px;
+            margin-left: 20px;
+            display: none;
+        }
+        .opcoes label {
+            display: block;
+            margin: 5px 0;
+            font-weight: normal;
+        }
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            float: right;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <img src="{{ url_for('static', filename='logo.png') }}" 
+                 alt="Logo" 
+                 style="height: 50px; vertical-align: middle; margin-right: 12px;">
+            Análise de Viabilidade de Negócio
+        </h1>
+
+        <p style="text-align: center; color: #7f8c8d;">Responda Sim ou Não. Se for Sim, marque os itens que aplicam-se ao seu negócio.</p>
+
+        <form method="POST">
+            <div class="pergunta">
+                <label><strong>1. Você já avaliou o mercado e sua concorrência?</strong></label><br>
+                <input type="radio" name="concorrencia" value="sim" onchange="mostrar('conc')"> Sim
+                <input type="radio" name="concorrencia" value="nao" onchange="esconder('conc')"> Não<br>
+                <div id="conc" class="opcoes">
+                    <label><input type="checkbox" name="conc_opcoes" value="concorrentes"> Identifiquei meus concorrentes diretos e indiretos</label><br>
+                    <label><input type="checkbox" name="conc_opcoes" value="swot"> Analisei pontos fortes e fracos (SWOT)</label><br>
+                    <label><input type="checkbox" name="conc_opcoes" value="diferencial"> Defini meu diferencial competitivo claro</label><br>
+                    <label><input type="checkbox" name="conc_opcoes" value="lacunas"> Identifiquei lacunas não exploradas</label><br>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <label><strong>2. Você conhece bem seu público-alvo?</strong></label><br>
+                <input type="radio" name="clientes" value="sim" onchange="mostrar('clientes')"> Sim
+                <input type="radio" name="clientes" value="nao" onchange="esconder('clientes')"> Não<br>
+                <div id="clientes" class="opcoes">
+                    <label><input type="checkbox" name="clientes_opcoes" value="perfil"> Defini perfil demográfico</label><br>
+                    <label><input type="checkbox" name="clientes_opcoes" value="necessidades"> Mapeiei necessidades e dores</label><br>
+                    <label><input type="checkbox" name="clientes_opcoes" value="habitoss"> Conheço hábitos de consumo</label><br>
+                    <label><input type="checkbox" name="clientes_opcoes" value="persona"> Criei personas com base em pesquisa</label><br>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <label><strong>3. Você tem estratégia de marketing e posicionamento?</strong></label><br>
+                <input type="radio" name="marketing" value="sim" onchange="mostrar('marketing')"> Sim
+                <input type="radio" name="marketing" value="nao" onchange="esconder('marketing')"> Não<br>
+                <div id="marketing" class="opcoes">
+                    <label><input type="checkbox" name="marketing_opcoes" value="posicionamento"> Defini meu posicionamento de marca</label><br>
+                    <label><input type="checkbox" name="marketing_opcoes" value="canais"> Escolhi canais de venda e divulgação</label><br>
+                    <label><input type="checkbox" name="marketing_opcoes" value="fidelizacao"> Tenho plano de fidelização</label><br>
+                    <label><input type="checkbox" name="marketing_opcoes" value="metricas"> Defini métricas para medir resultados</label><br>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <label><strong>4. Você possui a estrutura necessária para operar?</strong></label><br>
+                <input type="radio" name="estrutura" value="sim" onchange="mostrar('estrutura')"> Sim
+                <input type="radio" name="estrutura" value="nao" onchange="esconder('estrutura')"> Não<br>
+                <div id="estrutura" class="opcoes">
+                    <label><input type="checkbox" name="estrutura_opcoes" value="local"> Tenho local físico ou virtual adequado</label><br>
+                    <label><input type="checkbox" name="estrutura_opcoes" value="equipe"> Conto com equipe qualificada</label><br>
+                    <label><input type="checkbox" name="estrutura_opcoes" value="tecnologia"> Tenho equipamentos e tecnologia</label><br>
+                    <label><input type="checkbox" name="estrutura_opcoes" value="processos"> Defini processos operacionais</label><br>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <label><strong>5. Você tem um plano financeiro detalhado?</strong></label><br>
+                <input type="radio" name="financeiro" value="sim" onchange="mostrar('financeiro')"> Sim
+                <input type="radio" name="financeiro" value="nao" onchange="esconder('financeiro')"> Não<br>
+                <div id="financeiro" class="opcoes">
+                    <label><input type="checkbox" name="financeiro_opcoes" value="faturamento"> Fiz projeção de faturamento</label><br>
+                    <label><input type="checkbox" name="financeiro_opcoes" value="fluxo"> Montei um fluxo de caixa</label><br>
+                    <label><input type="checkbox" name="financeiro_opcoes" value="ponto"> Calculei o ponto de equilíbrio</label><br>
+                    <label><input type="checkbox" name="financeiro_opcoes" value="roi"> Defini expectativa de ROI</label><br>
+                </div>
+            </div>
+
+            <button type="submit">📊 Gerar Análise</button>
+            <div class="clear"></div>
+
+            <script>
+                function mostrar(id) { document.getElementById(id).style.display = "block"; }
+                function esconder(id) { document.getElementById(id).style.display = "none"; }
+            </script>
+        </form>
+    </div>
+</body>
+</html>

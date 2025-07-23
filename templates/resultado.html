@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado - Viabilidade</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .grafico {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .grafico img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .detalhes, .sugestoes {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+        .sugestoes {
+            background: #fffde7;
+            border-left: 4px solid #ffd54f;
+        }
+        .detalhes ul, .sugestoes ul {
+            margin-left: 20px;
+        }
+        a button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            display: block;
+            margin: 30px auto 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center;">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logotipo" style="max-height: 80px;">
+        </div>
+
+        <h1>📈 Diagnóstico Final: Viabilidade {{ nivel }}</h1>
+        <p style="color:{{ cor }}; font-size:1.2em; font-weight:bold; text-align: center;">
+            Pontuação: {{ pontuacao }}/100
+        </p>
+        <p style="text-align: center;"><strong>{{ recomendacao }}</strong></p>
+
+        <div class="grafico">
+            <h2>Nível de Viabilidade</h2>
+            <img src="{{ grafico_url }}" alt="Gráfico de Viabilidade">
+        </div>
+
+        <div class="detalhes">
+            <h3>📌 Análise Detalhada</h3>
+            <ul>
+                {% for item in detalhes %}
+                <li>{{ item | safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="sugestoes">
+            <h3>💡 Sugestões de Melhorias</h3>
+            <ul>
+                {% for sugestao in sugestoes %}
+                <li>{{ sugestao | safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <a href="/"><button>← Refazer Análise</button></a>
+    </div>
+</body>
+</html>
